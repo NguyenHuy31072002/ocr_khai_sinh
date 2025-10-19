@@ -10,6 +10,7 @@ import numpy as np
 import logging
 from pathlib import Path
 from functools import lru_cache
+from app.core.config.constants import YOLO_MODEL, YOLO_LOCAL
 import re
 
 # Setup logging
@@ -26,8 +27,8 @@ class OCRExtractor:
     
     def __init__(
         self, 
-        yolo_model_path: str = "/home/admin1/Code/ocr_khai_sinh/app/model_yolov11/best.pt",
-        # yolo_model_path: str = "/workspace/app/model_yolov11/best.pt",
+        # yolo_model_path: str = "/home/admin1/Code/ocr_khai_sinh/app/model_yolov11/best.pt",
+        yolo_model_path: str = YOLO_LOCAL,
         extract_fields: Optional[Set[str]] = None,
         class_mapping: Optional[Dict[int, str]] = None,
         batch_size: int = 1,

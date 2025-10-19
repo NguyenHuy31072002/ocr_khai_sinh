@@ -1,14 +1,45 @@
-version: "3.9"
+# version: "3.9"
+
+# services:
+#   fastapi-gpu:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: fastapi-gpu
+#     restart: unless-stopped
+#     ports:
+#       - "8123:8000"
+#     environment:
+#       - NVIDIA_VISIBLE_DEVICES=all
+#       - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+#     volumes:
+#       - .:/workspace
+#     runtime: nvidia
+
+
+
+
+
+
+
+
+
+
+
+
+
+version: '3.8'
 
 services:
-  fastapi-gpu:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fastapi-gpu
-    restart: unless-stopped
+    container_name: fastapi_app_huynk
     ports:
-      - "8123:8000"
+      - "8128:8000"
+    volumes:
+      - .:/workspace
     deploy:
       resources:
         reservations:
@@ -16,8 +47,5 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
-    volumes:
-      - .:/workspace
+    restart: always
+
