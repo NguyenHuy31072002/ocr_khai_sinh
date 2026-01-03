@@ -49,7 +49,7 @@ Jenkins sẽ:
 
 ## 🚀 HOẶC: Build ngay không cần đợi
 
-Nếu không muốn đợi 5 phút:
+Nếu không muốn đợi 5 phút
 
 1. Vào Jenkins job
 2. Click **Build Now**
