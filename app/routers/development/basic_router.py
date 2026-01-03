@@ -6,6 +6,10 @@ from PIL import Image
 import io
 import numpy as np
 from app.Ocr_extractor.ocr_extractor import OCRExtractor
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import StreamingResponse
+from PIL import Image
+import io
 
 extractor = OCRExtractor(extract_fields={'Họ và tên Mẹ', 'k_c_name', 'k_m_name', 'Họ và tên Cha','Họ và tên'})
 
@@ -55,16 +59,27 @@ async def extract_cccd_info(file: UploadFile = File(...)):
         # }
         
         return JSONResponse(content=response)
+
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
 
-
-
-
-
-
-
-
-
-
+@basic_router.post("/upload")
+async def upload_image(file: UploadFile = File(...)):
+    # Đọc file ảnh được upload
+    contents = await file.read()
+    
+    # Mở ảnh bằng PIL
+    image = Image.open(io.BytesIO(contents))
+    
+    # Chuyển đổi sang RGB nếu cần (để đảm bảo format JPEG)
+    if image.mode != 'RGB':
+        image = image.convert('RGB')
+    
+    # Encode ảnh thành bytes
+    img_byte_arr = io.BytesIO()
+    image.save(img_byte_arr, format='JPEG')
+    img_byte_arr.seek(0)
+    
+    # Trả về StreamingResponse
+    return StreamingResponse(img_byte_arr, media_type="image/jpeg")

@@ -28,7 +28,7 @@ class OCRExtractor:
     def __init__(
         self, 
         # yolo_model_path: str = "/home/admin1/Code/ocr_khai_sinh/app/model_yolov11/best.pt",
-        yolo_model_path: str = YOLO_LOCAL,
+        yolo_model_path: str = YOLO_MODEL,
         extract_fields: Optional[Set[str]] = None,
         class_mapping: Optional[Dict[int, str]] = None,
         batch_size: int = 1,
@@ -409,6 +409,8 @@ class OCRExtractor:
         # Clear CUDA cache if available
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
+
+
 
 
 

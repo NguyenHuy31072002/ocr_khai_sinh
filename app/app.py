@@ -26,6 +26,6 @@ async def startup_event():
     global extractor
     # Thay đổi đường dẫn này
     # extractor = OCRExtractor(yolo_model_path="/home/admin1/Code/ocr_khai_sinh/app/model_yolov11/best.pt")
-    extractor = OCRExtractor(yolo_model_path=YOLO_LOCAL)
+    extractor = OCRExtractor(yolo_model_path=YOLO_MODEL)
     end = time.perf_counter()
     print(f"Startup event took {end - start} seconds")
